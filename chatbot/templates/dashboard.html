@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>InPlace Chatbot Dashboard</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        h1 { color: #F38D23; }
+        .stat { margin: 10px 0; font-size: 1.2rem; }
+    </style>
+</head>
+<body>
+    <h1>📊 InPlace Candidate Dashboard</h1>
+
+    <div class="stat">👥 Total Candidates: <strong>{{ total }}</strong></div>
+    <div class="stat">📤 Messages Sent: <strong>{{ sent }}</strong></div>
+    <div class="stat">💬 Replied: <strong>{{ replied }}</strong></div>
+    <div class="stat">🔁 Reminded: <strong>{{ reminded }}</strong></div>
+    <div class="stat">✅ Completed: <strong>{{ completed }}</strong></div>
+
+    <p style="margin-top: 40px; font-size: 0.9rem;">Last updated: {{ now }}</p>
+</body>
+</html>

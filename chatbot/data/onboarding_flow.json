@@ -1,0 +1,243 @@
+{
+  "entry": {
+    "prompt": "Benvenuto su InPlace! Vuoi registrarti come Candidato? (digita “Candidato” per proseguire)",
+    "next": "account_creation"
+  },
+  "account_creation": {
+    "fields": [
+      { "name": "email",            "type": "string", "required": true },
+      { "name": "password",         "type": "string", "required": true },
+      { "name": "confirm_password", "type": "string", "required": true }
+    ],
+    "checks": [
+      { "name": "terms",            "label": "Accetto termini e condizioni",           "required": true },
+      { "name": "privacy",          "label": "Accetto informativa privacy",             "required": true },
+      { "name": "marketing_optin",  "label": "Ricevi comunicazioni commerciali",        "required": false }
+    ],
+    "social_login_options": ["Google","Facebook","LinkedIn"],
+    "on_success": "wizard/1"
+  },
+  "wizard": [
+    {
+      "step": 1,
+      "id": "dati_anagrafici",
+      "title": "Dati Anagrafici",
+      "precondition": {
+        "requires": ["codice_fiscale"],
+        "message": "Per proseguire devi inserire il Codice Fiscale."
+      },
+      "fields": [
+        { "name": "codice_fiscale",   "type": "string", "required": true },
+        { "name": "nome",             "type": "string", "required": true },
+        { "name": "cognome",          "type": "string", "required": true },
+        { "name": "data_nascita",     "type": "date",   "required": true, "readonly": true },
+        { "name": "cellulare",        "type": "string", "required": true },
+        { "name": "nazionalita",      "type": "string", "required": true }
+      ],
+      "auto_parse_codice_fiscale": true,
+      "avatar_update": true,
+      "on_success": "wizard/2"
+    },
+    {
+      "step": 2,
+      "id": "residenza_domicilio",
+      "title": "Residenza & Domicilio",
+      "fields": [
+        { "name": "res_paese",        "type": "string",  "required": true },
+        { "name": "res_regione",      "type": "string",  "required": true },
+        { "name": "res_provincia",    "type": "string",  "required": true },
+        { "name": "res_comune",       "type": "string",  "required": true },
+        { "name": "res_indirizzo",    "type": "string",  "required": true },
+        { "name": "res_cap",          "type": "string",  "required": true },
+        { "name": "domicilio_same",   "type": "boolean", "required": false },
+        { "name": "dom_paese",        "type": "string",  "required": false },
+        { "name": "dom_regione",      "type": "string",  "required": false },
+        { "name": "dom_provincia",    "type": "string",  "required": false },
+        { "name": "dom_comune",       "type": "string",  "required": false },
+        { "name": "dom_indirizzo",    "type": "string",  "required": false },
+        { "name": "dom_cap",          "type": "string",  "required": false }
+      ],
+      "on_success": "wizard/3"
+    },
+    {
+      "step": 3,
+      "id": "preferenze_lavoro",
+      "title": "Preferenze di Lavoro",
+      "fields": [
+        { "name": "settore",          "type": "string", "required": true },
+        { "name": "mansione",         "type": "string", "required": true },
+        { "name": "anni_esperienza",  "type": "integer","required": true },
+        { "name": "madrelingua",      "type": "string", "required": true },
+        { "name": "stato_occupazione","type": "string", "required": true }
+      ],
+      "on_success": "wizard/4"
+    },
+    {
+      "step": 4,
+      "id": "curriculum_formazione",
+      "title": "Curriculum & Formazione",
+      "fields": [
+        { "name": "cv_file",           "type": "file",   "required": false },
+        { "name": "job_locations",     "type": "string", "required": false, "note": "Dove vuoi lavorare?" }
+      ],
+      "repeatable": true,
+      "on_success": "wizard/5"
+    },
+    {
+      "step": 5,
+      "id": "esperienze_lingue",
+      "title": "Esperienze & Lingue",
+      "fields": [
+        {
+          "group": "esperienza",
+          "fields": [
+            { "name": "ruolo",         "type": "string", "required": true },
+            { "name": "datore",        "type": "string", "required": true },
+            { "name": "luogo",         "type": "string", "required": true },
+            { "name": "data_inizio",   "type": "date",   "required": true },
+            { "name": "data_fine",     "type": "date",   "required": false },
+            { "name": "descrizione",   "type": "string", "required": true }
+          ]
+        },
+        {
+          "group": "lingua",
+          "fields": [
+            { "name": "lingua",        "type": "string", "required": true },
+            { "name": "livello",       "type": "string", "required": true }
+          ]
+        }
+      ],
+      "on_success": "complete_registration"
+    }
+  ],
+  "complete_registration": {
+    "message": "Registrazione completata! Verifica la tua email per attivare l’account.",
+    "next": "dashboard_overview"
+  },
+  "dashboard_overview": {
+    "prompt": "Il tuo profilo è completo al {percent_complete}%. Seleziona la sezione che vuoi compilare ora: {missing_sections}.",
+    "sections": [
+      "Documenti di Riconoscimento",
+      "Documenti Personali",
+      "Documenti Contrattuali",
+      "Autocertificazione & TFR",
+      "Attivazione Firma Digitale"
+    ]
+  },
+  "sections": {
+    "Documenti di Riconoscimento": {
+      "fields": [
+        { "name": "tipo_doc",        "type": "string", "required": true, "options": ["Carta d'Identità","Patente","Passaporto"] },
+        { "name": "numero_doc",      "type": "string", "required": true },
+        { "name": "emesso_da",       "type": "string", "required": true },
+        { "name": "data_emissione",  "type": "date",   "required": true },
+        { "name": "data_scadenza",   "type": "date",   "required": true },
+        {
+          "name": "upload_mode",
+          "type": "choice",
+          "required": true,
+          "options": ["PDF","JPEG"]
+        },
+        {
+          "name": "doc_files",
+          "type": "file",
+          "required": true,
+          "note": "Se JPEG, fornire 2 immagini front+retro; se PDF, un unico file."
+        }
+      ]
+    },
+    "Documenti Personali": {
+      "fields": [
+        {
+          "name": "stato_famiglia",
+          "type": "choice",
+          "required": true,
+          "options": ["Nessuno","Conviventi","Altri familiari"],
+          "note": "Se 'Altri familiari', chiedi nomi e date di nascita."
+        },
+        {
+          "name": "familiari_a_carico",
+          "type": "list",
+          "required": false,
+          "note": "Inserisci nome, grado di parentela, CF, data nascita per ciascun familiare."
+        },
+        { "name": "detrazioni_imposta_file","type": "file","required": true },
+        { "name": "coordinate_bancarie_iban", "type": "string","required": true }
+      ]
+    },
+    "Documenti Contrattuali": {
+      "valid_for_all": [
+        { "name": "detrazioni_imposta_file",      "type": "file","required": true },
+        { "name": "stato_famiglia_residenza_file","type": "file","required": true },
+        { "name": "coordinate_bancarie_iban",     "type": "string","required": true },
+        { "name": "adesione_sindacato",          "type": "boolean","required": true }
+      ],
+      "valid_for_single": [
+        {
+          "name": "autocert_stato_disoccupazione",
+          "type": "object",
+          "required": true,
+          "fields": [
+            { "name": "sono_disoccupato","type": "boolean","required": true },
+            { "name": "disoccupato_dal", "type": "date",   "required": true }
+          ]
+        },
+        {
+          "name": "scelta_TFR",
+          "type": "object",
+          "required": true,
+          "fields": [
+            { "name": "destinazione_integrale","type": "boolean","required": true },
+            { "name": "destinazione_parziale", "type": "boolean","required": true },
+            { "name": "pensione_complementare","type": "boolean","required": true },
+            { "name": "fondo_pensionistico",   "type": "string", "required_if": "pensione_complementare" },
+            { "name": "data_decorrenza",       "type": "date",   "required": true },
+            { "name": "iscritto_pre_29apr1993","type": "boolean","required": true },
+            { "name": "data_prima_occupazione","type": "date",   "required": true }
+          ],
+          "explanation": "Spiega al candidato cosa significa TFR e le opzioni disponibili."
+        }
+      ]
+    },
+    "Attivazione Firma Digitale": {
+      "unlock_at_percent": 60,
+      "steps": [
+        {
+          "id": "consensi_preliminari",
+          "checks": [
+            "vision_termini_condizioni",
+            "privacy_firma_digitale",
+            "biometric_data_consent"
+          ]
+        },
+        {
+          "id": "conferma_numero_sms",
+          "type": "sms_verification",
+          "readonly_after": true,
+          "message": "Verifica il numero di cellulare ricevendo un SMS."
+        },
+        {
+          "id": "spid_auth",
+          "type": "external_auth",
+          "provider": "SPID",
+          "message": "Accedi con SPID per completare l’attivazione."
+        },
+        {
+          "id": "email_link",
+          "type": "notification",
+          "message": "Ti abbiamo inviato un’email con il link per la firma elettronica."
+        },
+        {
+          "id": "e_signature_portal",
+          "type": "web_flow",
+          "actions": ["preview_document","click_firma","enter_otp_sms"]
+        }
+      ]
+    }
+  },
+  "final_notifications": {
+    "contract_signed":   "Il contratto è stato firmato correttamente.",
+    "signature_activated":"La firma digitale è stata attivata.",
+    "profile_complete":  "Complimenti! Il tuo profilo è ora al 100% e attivo. Puoi iniziare a cercare lavoro."
+  }
+}

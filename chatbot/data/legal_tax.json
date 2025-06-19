@@ -1,0 +1,58 @@
+{
+  "DetrazioniLavoroDipendenteAssimilato": {
+    "options": [
+      "Redditi di lavoro dipendente e assimilato rapportati al periodo di lavoro nell'anno",
+      "Redditi di pensione rapportati al periodo di pensione nell'anno",
+      "Non applicare le detrazioni per lavoro dipendente e assimilato",
+      "Applicare un'aliquota più elevata di quella risultante in sede di conguaglio fiscale"
+    ]
+  },
+  "DetrazioniCarichiFamiliari": {
+    "description": "Variano in funzione del reddito complessivo dell'anno in corso",
+    "reddito_complessivo_options": [
+      "Corrispondente al reddito corrisposto dal datore di lavoro",
+      "Corrispondente al reddito del datore di lavoro più altri redditi diversi dal lavoro dipendente",
+      "Valore specificato dal candidato"
+    ],
+    "dichiarazioni": [
+      "Di non essere titolare di pensione",
+      "Di essere titolare di pensione"
+    ]
+  },
+  "MassimaleContributivoPensionabile": {
+    "options": [
+      "Soggetto al massimale contributivo e pensionabile ex art.2 comma 18 L. 335/1995 (iscritto dopo 31/12/1995)",
+      "Non soggetto al massimale contributivo e pensionabile ex art.2 comma 18 L. 335/1995 (iscritto prima del 1 gennaio 1996)"
+    ],
+    "impegno": "Presentare nuova dichiarazione aggiornata in caso di modifiche di stato familiare, reddituale o di pensione"
+  },
+  "PrecedenteRapportoBreve": {
+    "dichiarazione": "Dichiarazione di non aver avuto un precedente rapporto di lavoro",
+    "applicazione_detrazioni": "Richiede che la detrazione minima sia applicata interamente e non rapportata alla durata del rapporto"
+  },
+  "AccumuloDetrazioni": {
+    "descrizione": "Applicare le ritenute fiscali considerando somme corrisposte, ritenute operate e detrazioni del rapporto precedente"
+  },
+  "SituazioneFamigliaPrecedente": {
+    "options": [
+      "Conferma della situazione familiare esposta",
+      "Altra situazione di cui da' specifica indicazione"
+    ]
+  },
+  "TrattamentoIntegrativo": {
+    "options": [
+      "Si",
+      "No",
+      "Automatico",
+      "A conguaglio"
+    ]
+  },
+  "DichiarazioniTFR": {
+    "options": [
+      "Non aver diritto alle detrazioni art.2 comma 514 L.244/2007, già applicate da precedente sostituto d'imposta"
+    ]
+  },
+  "PrevidenzaComplementare": {
+    "description": "Contributi di previdenza complementare versati dalla data di prima occupazione successiva al 1/1/2007"
+  }
+}
